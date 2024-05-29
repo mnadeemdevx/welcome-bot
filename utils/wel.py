@@ -5,6 +5,7 @@ from html2image import Html2Image
 from PIL import Image
 import io
 
+chrome_executable_path = os.getenv('CHROME_PATH')
 html_str = """
 
 <!DOCTYPE html>
@@ -89,7 +90,7 @@ async def get_welcome_card(member: discord.Member):
     )
     filename = "wel_{}_{}.png".format(member.guild.id, member.id)
 
-    h2i = Html2Image()
+    h2i = Html2Image(chrome_path=chrome_executable_path)
     h2i.screenshot(html_str=html, save_as=filename, size=(1045, 450))
 
     pil_image = Image.open(filename)
